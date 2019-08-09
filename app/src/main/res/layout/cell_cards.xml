@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginEnd="@dimen/margin"
+        android:layout_marginTop="@dimen/margin"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="2dp"
+        android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:id="@+id/carPicture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
+        <FrameLayout
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/gradient_drawable"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
+        <TextView
+                android:id="@+id/carName"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/ratingBar"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginBottom="9dp"
+                android:textSize="15sp"
+                tools:text="Toyota Celica"
+                android:fontFamily="@font/rubik_medium"/>
+
+        <TextView
+                android:id="@+id/carPrice"
+                android:fontFamily="@font/rubik_medium"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginEnd="@dimen/margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="12€/j"/>
+
+        <RatingBar
+                android:id="@+id/ratingBar"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="9dp"
+                android:layout_marginStart="@dimen/margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:transformPivotX="0dp"
+                android:transformPivotY="0dp"
+                android:stepSize="0.5"
+                style="@style/RatingBarStyle"
+                android:max="5"/>
+
+        <TextView
+                android:id="@+id/ratingCount"
+                android:fontFamily="@font/rubik"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@id/ratingBar"
+                app:layout_constraintTop_toTopOf="@id/ratingBar"
+                app:layout_constraintBottom_toBottomOf="@id/ratingBar"
+                android:layout_marginStart="9dp"
+                tools:text="36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
