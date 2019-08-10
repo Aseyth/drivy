@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 class RecyclerViewSimpleAdapter<T, ViewHolder : RecyclerView.ViewHolder>(
     private val createVH: ((parent: ViewGroup, viewType: Int) -> ViewHolder),
     private val bindVH: ((holder: ViewHolder, item: T) -> Unit),
-    private val onListUpdated: ((isEmpty: Boolean) -> Unit)? = null,
     private val clickListener: ((item: T) -> Unit)? = null
 ) : RecyclerView.Adapter<ViewHolder>() {
 
@@ -17,7 +16,6 @@ class RecyclerViewSimpleAdapter<T, ViewHolder : RecyclerView.ViewHolder>(
     var items: List<T> = emptyList()
         set(newValue) {
             field = newValue
-            onListUpdated?.invoke(newValue.isEmpty())
             notifyDataSetChanged()
         }
 

@@ -8,8 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="RatingBarStyle" parent="Widget.AppCompat.RatingBar.Small">
+    <style name="SmallRatingBarStyle" parent="Widget.AppCompat.RatingBar.Small">
         <item name="android:progressTint">@color/yellow</item>
         <item name="android:progressBackgroundTint">@color/white</item>
+    </style>
+
+    <style name="RatingBarStyle" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressTint">@color/yellow</item>
+        <item name="android:progressBackgroundTint">@color/grey</item>
+        <item name="android:secondaryProgressTint">@android:color/transparent</item>
     </style>
 </resources>

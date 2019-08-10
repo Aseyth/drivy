@@ -16,13 +16,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.hugoung.drivy.R
-import com.hugoung.drivy.data.entity.CarList
+import com.hugoung.drivy.data.entity.CarDetails
 import com.hugoung.drivy.extension.snack
+import com.hugoung.drivy.navigation.DrivyNavigator
+import com.hugoung.drivy.util.Event
 import com.hugoung.drivy.util.ViewModelFactory
 import kotlinx.android.synthetic.main.cell_cards.view.*
 import kotlinx.android.synthetic.main.fragment_car_list.*
 
 class CarListFragment : Fragment() {
+
+    private val navigator: DrivyNavigator by lazy { DrivyNavigator(context!!) }
 
     private fun <T> LiveData<T>.observe(observe: (T) -> Unit) = observe(this@CarListFragment, Observer { observe(it) })
 
@@ -38,19 +42,23 @@ class CarListFragment : Fragment() {
         val ratingCount: TextView = itemView.ratingCount
     }
 
-    private var adapter = RecyclerViewSimpleAdapter<CarList, ViewHolder>({ parent, _ ->
+    private var adapter = RecyclerViewSimpleAdapter<CarDetails, ViewHolder>({ parent, _ ->
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.cell_cards, parent, false))
-    }, { holder, carList ->
-        holder.carName.text = getString(R.string.car_name, carList.brand, carList.model)
-        holder.price.text = getString(R.string.car_price, carList.price_per_day, getString(R.string.price))
-        holder.rating.rating = carList.rating.average
-        holder.ratingCount.text = carList.rating.count.toString()
+    }, { holder, carDetails ->
+        holder.carName.text = getString(R.string.car_name, carDetails.brand, carDetails.model)
+        holder.price.text = getString(R.string.car_price, carDetails.price_per_day, getString(R.string.price))
+        holder.rating.rating = carDetails.rating.average
+        holder.ratingCount.text = getString(R.string.rating_count, carDetails.rating.count)
         Glide
             .with(context!!)
-            .load(carList.picture_url)
+            .load(carDetails.picture_url)
             .transition(DrawableTransitionOptions.withCrossFade())
             .centerCrop()
             .into(holder.carPicture)
+    }, {
+        fragmentManager?.run {
+            navigator.presentCarDetailsFragment(this, it)
+        }
     })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -61,7 +69,12 @@ class CarListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         carRecycler.layoutManager = LinearLayoutManager(context!!)
         initObservers()
-        drivyViewModel.fetch()
+        if(drivyViewModel.savedList.isEmpty()) {
+            drivyViewModel.fetch()
+        } else {
+            adapter.items = drivyViewModel.savedList
+            carRecycler.adapter = adapter
+        }
     }
 
     override fun onDestroy() {
@@ -72,6 +85,7 @@ class CarListFragment : Fragment() {
     private fun initObservers() {
         drivyViewModel.carList.observe {
             it.getContentIfNotHandled()?.run {
+                drivyViewModel.savedList = this
                 adapter.items = this
                 carRecycler.adapter = adapter
             }

@@ -7,7 +7,7 @@ import com.hugoung.drivy.navigation.DrivyNavigator
 
 class MainActivity : AppCompatActivity() {
 
-    private val navigator: DrivyNavigator by lazy { DrivyNavigator() }
+    private val navigator: DrivyNavigator by lazy { DrivyNavigator(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

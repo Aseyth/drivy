@@ -3,4 +3,6 @@
     <string name="car_name">%s %s</string>
     <string name="car_price">%d%s</string>
     <string name="price">€/j</string>
+    <string name="owner">Owner</string>
+    <string name="rating_count">(%d)</string>
 </resources>

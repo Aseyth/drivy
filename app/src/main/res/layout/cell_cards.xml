@@ -67,12 +67,13 @@
                 android:layout_marginStart="@dimen/margin"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="@dimen/margin"
+                android:isIndicator="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:transformPivotX="0dp"
                 android:transformPivotY="0dp"
                 android:stepSize="0.5"
-                style="@style/RatingBarStyle"
+                style="@style/SmallRatingBarStyle"
                 android:max="5"/>
 
         <TextView

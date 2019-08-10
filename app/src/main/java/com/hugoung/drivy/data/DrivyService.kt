@@ -1,6 +1,6 @@
 package com.hugoung.drivy.data
 
-import com.hugoung.drivy.data.entity.CarList
+import com.hugoung.drivy.data.entity.CarDetails
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Url
@@ -14,5 +14,5 @@ interface DrivyService  {
     }
 
     @GET
-    fun getUrl(@Url url: String): Single<ArrayList<CarList>>
+    fun getUrl(@Url url: String): Single<ArrayList<CarDetails>>
 }
